@@ -1,0 +1,50 @@
+.m-header  {
+    background-color: #451804;
+    text-align: center;
+    color: white;
+    h1 { margin: 0; padding: 0; }
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue", "Helvetica";
+    
+    &-main  {
+        padding-bottom: 10px;
+
+        &-title {
+            display: flex;
+            justify-content: center;
+
+            &-cont {
+                width: 50%;
+                &-text {
+                    font-size: 28px;
+                    text-align: center;
+                }
+
+            }
+            
+         &-logo{
+            width: 50%;
+            //width: 50px;
+            height: 50px;    
+            margin-bottom: 10px;       
+            //margin-left: auto;     
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+            }
+        font-size: 25px;
+        }
+
+
+        &-nav {
+            display: flex;
+            justify-content: space-around;
+
+              
+        }
+
+    }
+}
