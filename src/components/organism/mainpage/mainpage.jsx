@@ -36,7 +36,6 @@ const MainPage = () => {
     setCurrentPhotos(NasaPhotos)
   }
     
-  console.log(currentDateEarth)
 
 
     useEffect(() => {
@@ -45,7 +44,7 @@ const MainPage = () => {
       const NasaPhotos =  await  getPhotosApiDefault(currentRover, checkDate(currentDateSol, currentDateEarth, typeOfDate), typeOfDate, page)
       setCurrentPhotos(NasaPhotos)
     }
-    console.log('i fire once');
+   
     showPhotosDefault()
     
     }, [currentRover, page])
@@ -55,10 +54,10 @@ const MainPage = () => {
       const showPhotosDefault = async () => {
   
         const NasaPhotos =  await  getPhotosApicamera(currentRover, checkDate(currentDateSol, currentDateEarth, typeOfDate), typeOfDate, page, currentCamera)
-        console.log(NasaPhotos)
+        
         setCurrentPhotos(NasaPhotos)
       }
-      console.log('i fire once');
+     
       showPhotosDefault()
       
       }, [currentCamera])
