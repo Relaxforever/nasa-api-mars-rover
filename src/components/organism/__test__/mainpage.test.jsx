@@ -48,6 +48,38 @@ it("renders The Word Spirit", () =>  {
     })
 
   })
-  
+
+  test('Checks that the buttons appear after loading images',
+  async()  => {
+    render(<MainPage/>)
+    await waitFor(() => {
+        expect(screen.getByText('Siguiente')).toBeInTheDocument()
+    })
+    
+  })
+
+  test('Check that some  camera  options get disable when clicking another type  of landrover',
+  async()  => {
+    render(
+        <MainPage />
+    )
+    
+    fireEvent.click(screen.getByText('Opportunity'))
+    await waitFor(() => {
+        expect(screen.queryByText('MAHLI')).not.toBeInTheDocument()
+    })
+    })
+
+    test('Check that curiosity cameras are loading',
+    async()  => {
+      render(
+          <MainPage />
+      )
+      
+      await waitFor(() => {
+          expect(screen.getByText('MAHLI')).toBeInTheDocument()
+      })
+      })
+
 
 
