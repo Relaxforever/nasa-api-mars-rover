@@ -2,7 +2,7 @@
 import React,  {useState, useEffect}  from 'react'
 import './mainpage.scss'
 import  { getPhotosApiDefault, getPhotosApicamera } from '../../../services/nasaApi'
-import { checkDate } from '../../../utils/utils'
+import { checkDate, saveData } from '../../../utils/utils'
 
 
 
@@ -17,6 +17,7 @@ const MainPage = () => {
   const [currentDateSol, setCurrentDateSol] = useState(1000);
   const [currentCamera, setCurrentCamara] = useState('todas')
   const [page, setPage] = useState(1);
+  const [recommended, setRecommended] = useState([])
 
  
   const HandleClickPlus = () => {
@@ -33,6 +34,10 @@ const MainPage = () => {
 
   const SearchAway =  async () => {
     const NasaPhotos =  await  getPhotosApiDefault(currentRover, checkDate(currentDateSol, currentDateEarth, typeOfDate), typeOfDate, page)
+    setCurrentPhotos(NasaPhotos)
+  }
+  const SearchAwayFavorite =  async (currentDate) => {
+    const NasaPhotos =  await  getPhotosApiDefault(currentRover, currentDate, typeOfDate, page)
     setCurrentPhotos(NasaPhotos)
   }
     
@@ -63,6 +68,19 @@ const MainPage = () => {
       }, [currentCamera])
 
 
+      useEffect(() => {
+        if (typeOfDate === 'sol'){
+        let retrievedObject = localStorage.getItem('HorarioSolar')
+          retrievedObject && setRecommended(retrievedObject.split(','))
+          
+        }else {
+          let retrievedObject = localStorage.getItem('HorarioTerricola')
+          retrievedObject && setRecommended(retrievedObject.split(','))
+          
+        }
+        }, [typeOfDate])
+
+
 
     return (
         <>
@@ -88,8 +106,14 @@ const MainPage = () => {
               </div>
               )}
               <button className='o-mainpage-cont-searcher-button' onClick={()  => SearchAway()}>Buscar!</button>
+              <button className='o-mainpage-cont-searcher-button' onClick={()  => saveData(currentDateSol, currentDateEarth, typeOfDate)}>Guardar Busqueda</button>
             </div>
-
+            {recommended.length !== 0 ? <div className='o-mainpage-cont-title' ><h4>Busquedas Guardadas</h4></div> : ''} 
+            <div className='o-mainpage-cont-recommended'>
+                {recommended.map((elem, idx) => (
+                  <div className='o-mainpage-cont-recommended-cont' onClick={() => SearchAwayFavorite(elem)}><p>{elem}</p></div>
+                ))}
+            </div>
 
               {currentphotos !== undefined ? (
                 <>
