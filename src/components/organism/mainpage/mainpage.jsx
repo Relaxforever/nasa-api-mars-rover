@@ -3,6 +3,7 @@ import React,  {useState, useEffect}  from 'react'
 import './mainpage.scss'
 import  { getPhotosApiDefault, getPhotosApicamera } from '../../../services/nasaApi'
 import { checkDate, saveData } from '../../../utils/utils'
+import ImageCollage from '../../molecules/image-collage/image-collage'
 
 
 
@@ -121,6 +122,7 @@ const MainPage = () => {
                   {currentRover === 'opportunity' ? (<div className='o-mainpage-cont-images-text-advice'><h3>El Opportunity se declaro oficialmente terminado en Junio 10, 2018</h3></div>) :  ''}
                   {currentRover === 'spirit' ? (<div className='o-mainpage-cont-images-text-advice'><h3>El spirit se declaro oficialmente terminado en Marzo 22, 2010</h3></div>) :  ''}
                 </div>
+                
                 <div className='o-mainpage-currentRover-cont'>
                   {currentRover === 'curiosity' ? 
                   (<>
@@ -154,22 +156,10 @@ const MainPage = () => {
                 </div>
                 
 
-                <div className='o-mainpage-cont-images'>
-                  {currentphotos !== undefined && currentphotos.photos.length !== 0 ? (
-                    currentphotos.photos.map((elem, idx) => (
-                      <div className='o-mainpage-cont-images-cont' key={idx}>
-                        <div className='o-mainpage-cont-images-cont-img'>
-                          <img src={elem.img_src} alt={'FotoMarte-' + elem.id}/>
-                        </div>
-                        <div className='o-mainpage-cont-images-cont-text'>
-                        <p> Foto tomada en horario tierra el dia {elem.earth_date}</p>
-                        <p> Foto tomada con la Camara  {elem.camera.name}</p>
-                        </div>
 
-                      </div>
-                    ))
-                  ) : ""}
-                </div>
+                <ImageCollage currentphotos={currentphotos} />
+                
+
                 <div className='o-mainpage-cont-buttons'>
 
                   {page !== 1 ? <div className='o-mainpage-cont-buttons-text' onClick={() => HandleClickLess()}><p>Atras</p></div>  : ''}
