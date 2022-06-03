@@ -1,4 +1,4 @@
-import MainPage from "../mainpage/mainpage";
+import MainPage from "../mainpage";
 import { fireEvent,  render, screen, waitFor } from "@testing-library/react"
 
 
@@ -80,6 +80,21 @@ it("renders The Word Spirit", () =>  {
           expect(screen.getByText('MAHLI')).toBeInTheDocument()
       })
       })
+
+
+      test('Check that the request is being loading in the endpoint',
+      async()  => {
+        render(
+            <MainPage />
+        )
+        
+        fireEvent.click(screen.getByText('Spirit'))
+        await waitFor(() => {
+            expect(screen.queryByText('MINITES')).not.toBeInTheDocument()
+        })
+        }
+    
+      )
 
 
 

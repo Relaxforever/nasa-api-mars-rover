@@ -79,6 +79,28 @@
             }
         }
 
+        &-title {
+            color: white;
+        }
+        &-recommended {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            &-cont {
+                background-color:  #ff5435;
+                border-radius: 5px;
+                margin: 5px;
+                width: 100px;
+                color: white;
+                font-size: 14px;
+                &:hover {
+                    background-color: #cc1e2c;
+                    color: #eeaaa1;
+                }
+            }
+        }
+
         &-images {
 
             &-text {
